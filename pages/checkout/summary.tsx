@@ -1,6 +1,6 @@
-import NextLink from 'next/link';
 
-import { Link, Box, Button, Card, CardContent, Divider, Grid, Typography } from '@mui/material';
+import Link from 'next/link';
+import { Box, Button, Card, CardContent, Divider, Grid, Typography } from '@mui/material';
 
 import { ShopLayout } from '../../components/layouts/ShopLayout';
 import { CartList, OrderSummary } from '../../components/cart';
@@ -23,11 +23,11 @@ const SummaryPage = () => {
 
                             <Box display='flex' justifyContent='space-between'>
                                 <Typography variant='subtitle1'>Dirección de entrega</Typography>
-                                <NextLink href='/checkout/address' passHref>
-                                    <Link underline='always'>
-                                        Editar
-                                    </Link>
-                                </NextLink>
+
+                                <Link href='/checkout/address' >
+                                    Editar
+                                </Link>
+
                             </Box>
 
 
@@ -40,11 +40,11 @@ const SummaryPage = () => {
                             <Divider sx={{ my: 1 }} />
 
                             <Box display='flex' justifyContent='end'>
-                                <NextLink href='/cart' passHref>
-                                    <Link underline='always'>
-                                        Editar
-                                    </Link>
-                                </NextLink>
+
+                                <Link href='/cart'>
+                                    Editar
+                                </Link>
+
                             </Box>
 
                             <OrderSummary />

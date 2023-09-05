@@ -1,7 +1,6 @@
-import NextLink from 'next/link';
-
+import Link from 'next/link';
 import { RemoveShoppingCartOutlined } from "@mui/icons-material"
-import { Box, Link, Typography } from "@mui/material"
+import { Box, Typography } from "@mui/material"
 import { ShopLayout } from "../../components/layouts"
 
 
@@ -18,11 +17,11 @@ const EmptyPage = () => {
                 <RemoveShoppingCartOutlined sx={{ fontSize: 100 }} />
                 <Box display='flex' flexDirection='column' alignItems='center'>
                     <Typography>Su carrito está vació</Typography>
-                    <NextLink href='/' passHref>
-                        <Link typography="h4" color='secondary'>
-                            Regresar
-                        </Link>
-                    </NextLink>
+
+                    <Link href='/' typography="h4" color='secondary'>
+                        Regresar
+                    </Link>
+
                 </Box>
 
 

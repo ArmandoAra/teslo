@@ -1,15 +1,15 @@
-import { FC, ReactComponentElement } from 'react';
+import { FC, ReactNode } from 'react';
 import Head from 'next/head';
 
 import { Navbar, SideMenu } from '../ui';
 import { JsxElement } from 'typescript';
 
-
+// Otra opción sería usar extends de PropsWithChildren a Props (interface Props extends PropsWithChildren)
 interface Props {
     title: string;
     pageDescription: string;
-    imageFullUrl?: string;
-    children: ReactComponentElement<any>
+    imageFullUrl?: string; //Para cuando compartimos el url, sepa que imagen mostrar en predeterminado
+    children?: ReactNode;
 }
 
 export const ShopLayout: FC<Props> = ({ children, title, pageDescription, imageFullUrl }) => {

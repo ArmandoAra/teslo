@@ -1,38 +1,24 @@
-import { Grid, Typography } from "@mui/material"
+import { FC, PropsWithChildren } from 'react';
+import Head from 'next/head';
+import { Box } from '@mui/material';
 
+interface Props extends PropsWithChildren {
+    title: string;
+}
 
-export const OrderSummary = () => {
+export const AuthLayout: FC<Props> = ({ children, title }) => {
     return (
-        <Grid container>
+        <>
+            <Head>
+                <title>{title}</title>
+            </Head>
 
-            <Grid item xs={6}>
-                <Typography>No. Productos</Typography>
-            </Grid>
-            <Grid item xs={6} display='flex' justifyContent='end'>
-                <Typography>3 items</Typography>
-            </Grid>
+            <main>
+                <Box display='flex' justifyContent='center' alignItems='center' height="calc(100vh - 200px)">
+                    {children}
+                </Box>
+            </main>
 
-            <Grid item xs={6}>
-                <Typography>SubTotal</Typography>
-            </Grid>
-            <Grid item xs={6} display='flex' justifyContent='end'>
-                <Typography>{`$${155.36}`}</Typography>
-            </Grid>
-
-            <Grid item xs={6}>
-                <Typography>Impuestos (15%)</Typography>
-            </Grid>
-            <Grid item xs={6} display='flex' justifyContent='end'>
-                <Typography>{`$${35.34}`}</Typography>
-            </Grid>
-
-            <Grid item xs={6} sx={{ mt: 2 }}>
-                <Typography variant="subtitle1">Total:</Typography>
-            </Grid>
-            <Grid item xs={6} sx={{ mt: 2 }} display='flex' justifyContent='end'>
-                <Typography variant="subtitle1">{`$${186.34}`}</Typography>
-            </Grid>
-
-        </Grid>
+        </>
     )
 }

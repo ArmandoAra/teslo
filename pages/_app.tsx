@@ -7,7 +7,7 @@ import { lightTheme } from '../themes';
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider theme={lightTheme}>
-      <CssBaseline />
+      <CssBaseline />  {/* Para que muestre los temas de MUI */}
       <Component {...pageProps} />
     </ThemeProvider>
   )

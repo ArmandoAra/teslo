@@ -1,10 +1,12 @@
+// POSTERIORMENTE ESTO VA PARA LA DB
+
 interface SeedProduct {
     description: string;
     images: string[];
     inStock: number;
     price: number;
     sizes: ValidSizes[];
-    slug: string;
+    slug: string; //Es utilizado para que sea el url que se coloca en las paginas
     tags: string[];
     title: string;
     type: ValidTypes;
@@ -15,7 +17,7 @@ type ValidSizes = 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL' | 'XXXL';
 type ValidTypes = 'shirts' | 'pants' | 'hoodies' | 'hats';
 
 interface SeedData {
-    products: SeedProduct[],
+    products: SeedProduct[], //Con esto sera mas facil construir usuarios de prueba
 }
 
 

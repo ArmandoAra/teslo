@@ -1,5 +1,5 @@
-import NextLink from 'next/link';
-import { Box, Button, Grid, Link, TextField, Typography } from '@mui/material';
+import Link from 'next/link';
+import { Box, Button, Grid, TextField, Typography } from '@mui/material';
 import { AuthLayout } from '../../components/layouts'
 
 const LoginPage = () => {
@@ -25,11 +25,9 @@ const LoginPage = () => {
                     </Grid>
 
                     <Grid item xs={12} display='flex' justifyContent='end'>
-                        <NextLink href="/auth/register" passHref>
-                            <Link underline='always'>
-                                ¿No tienes cuenta?
-                            </Link>
-                        </NextLink>
+                        <Link href="/auth/register"  >
+                            ¿No tienes cuenta?
+                        </Link>
                     </Grid>
                 </Grid>
             </Box>

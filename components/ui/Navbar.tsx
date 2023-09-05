@@ -1,6 +1,6 @@
-import NextLink from 'next/link';
+import Link from 'next/link'
 
-import { AppBar, Badge, Box, Button, IconButton, Link, Toolbar, Typography } from '@mui/material';
+import { AppBar, Badge, Box, Button, IconButton, Toolbar, Typography } from '@mui/material';
 import { SearchOutlined, ShoppingCartOutlined } from '@mui/icons-material';
 
 export const Navbar = () => {
@@ -8,7 +8,7 @@ export const Navbar = () => {
         <AppBar>
             <Toolbar>
 
-                <Link href='/' display='flex' alignItems='center'>
+                <Link href='/' >
                     <Typography variant='h6'>Teslo |</Typography>
                     <Typography sx={{ ml: 0.5 }}>Shop</Typography>
                 </Link>
@@ -16,6 +16,8 @@ export const Navbar = () => {
 
                 <Box flex={1} />
 
+                {/* Condicional para mostrar los botones solo en pantallas grandes, utilizando la ventaja 
+                que nos proporciona material al poder tener acceso con sx a las propiedades globales como sm xs */}
                 <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
 
                     <Link href='/category/men'>
@@ -44,11 +46,12 @@ export const Navbar = () => {
 
                 <Link href="/cart">
                     <IconButton>
-                        <Badge badgeContent={2} color="secondary">
+                        <Badge badgeContent={2} color="secondary"> {/* El badgeContent es donde sale el numerito encima del carrito de compras */}
                             <ShoppingCartOutlined />
                         </Badge>
                     </IconButton>
                 </Link>
+
 
 
                 <Button>

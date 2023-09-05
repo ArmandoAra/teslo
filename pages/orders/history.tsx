@@ -1,12 +1,12 @@
-import NextLink from 'next/link';
+
 
 import { Typography, Grid, Chip, Link } from '@mui/material';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 
 import { ShopLayout } from '../../components/layouts';
 
 
-
+//Asi va a estar confexionada las columnas de la tabla
 const columns: GridColDef[] = [
     { field: 'id', headerName: 'ID', width: 100 },
     { field: 'fullname', headerName: 'Nombre Completo', width: 300 },
@@ -16,7 +16,8 @@ const columns: GridColDef[] = [
         headerName: 'Pagada',
         description: 'Muestra información si está pagada la orden o no',
         width: 200,
-        renderCell: (params: GridValueGetterParams) => {
+        // renderCell va a recibir una funcion que va a retornar un componente u otro dependiendo si la orden esta pagada
+        renderCell: (params: GridRenderCellParams) => {
             return (
                 params.row.paid
                     ? <Chip color="success" label="Pagada" variant='outlined' />
@@ -29,19 +30,20 @@ const columns: GridColDef[] = [
         headerName: 'Ver orden',
         width: 200,
         sortable: false,
-        renderCell: (params: GridValueGetterParams) => {
+        // va a recibir una funcion que retorna el link dependiendo del id de la fila
+        renderCell: (params: GridRenderCellParams) => {
             return (
-                <NextLink href={`/orders/${params.row.id}`} passHref>
-                    <Link underline='always'>
-                        Ver orden
-                    </Link>
-                </NextLink>
+
+                <Link href={`/orders/${params.row.id}`} underline='always'>
+                    Ver orden
+                </Link>
+
             )
         }
     }
 ];
 
-
+// Asi van a ser los datos que estaran en las filas de la tabla
 const rows = [
     { id: 1, paid: true, fullname: 'Fernando Herrera' },
     { id: 2, paid: false, fullname: 'Melissa Flores' },
@@ -63,8 +65,8 @@ const HistoryPage = () => {
                     <DataGrid
                         rows={rows}
                         columns={columns}
-                        pageSize={10}
-                        rowsPerPageOptions={[10]}
+                        pageSizeOptions={[25, 50, 100]}
+
                     />
 
                 </Grid>
