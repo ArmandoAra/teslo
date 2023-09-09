@@ -1,5 +1,6 @@
 import { createTheme } from '@mui/material/styles';
 import { red, } from '@mui/material/colors';
+import { Color } from '../../00-termidados/next-pokemon/interfaces/descriptionData';
 
 
 export const lightTheme = createTheme({
@@ -66,7 +67,8 @@ export const lightTheme = createTheme({
                     borderRadius: 10,
                     ":hover": {
                         backgroundColor: 'rgba(0,0,0,0.05)',
-                        transition: 'all 0.3s ease-in-out'
+                        transition: 'all 0.3s ease-in-out',
+                        color: '#3A64D8',
                     }
                 }
             }

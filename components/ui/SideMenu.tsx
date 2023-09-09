@@ -1,13 +1,40 @@
+import { useContext, useState } from "react"
+
+import router from 'next/router';
+
+//MUI
 import { Box, Divider, Drawer, IconButton, Input, InputAdornment, List, ListItem, ListItemIcon, ListItemText, ListSubheader } from "@mui/material"
 import { AccountCircleOutlined, AdminPanelSettings, CategoryOutlined, ConfirmationNumberOutlined, EscalatorWarningOutlined, FemaleOutlined, LoginOutlined, MaleOutlined, SearchOutlined, VpnKeyOutlined } from "@mui/icons-material"
 
+//Context
+import { UIContext } from "@/context"
+
+
 
 export const SideMenu = () => {
+
+    const { sideMenuOpen, closeSideBar } = useContext(UIContext)
+
+    const navigateTo = (url: string) => {
+        router.push(url);
+        closeSideBar();
+    }
+
+    //value y onChange del input respectivamete para ir controlando el valor del input
+    const [searchTerm, setSearchTerm] = useState('')
+
+    const onSearchTerm = () => {
+        if (searchTerm.trim().length === 0) return; //Evaluamos que no este vacio el campo de busqueda
+
+        navigateTo(`/search/${searchTerm}`);
+    }
+
     return (
         <Drawer
-            open={false}
+            open={sideMenuOpen ? true : false}
             anchor='right'
             sx={{ backdropFilter: 'blur(4px)', transition: 'all 0.5s ease-out' }}
+            onClose={closeSideBar}
         >
             <Box sx={{ width: 250, paddingTop: 5 }}>
 
@@ -15,12 +42,16 @@ export const SideMenu = () => {
 
                     <ListItem>
                         <Input
+                            autoFocus
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            onKeyPress={(e) => e.key === 'Enter' ? onSearchTerm() : null}
                             type='text'
                             placeholder="Buscar..."
                             endAdornment={
                                 <InputAdornment position="end">
                                     <IconButton
-                                        aria-label="toggle password visibility"
+                                        onClick={onSearchTerm}
                                     >
                                         <SearchOutlined />
                                     </IconButton>
@@ -44,21 +75,21 @@ export const SideMenu = () => {
                     </ListItem>
 
 
-                    <ListItem button sx={{ display: { xs: '', sm: 'none' } }}>
+                    <ListItem button sx={{ display: { xs: '', sm: 'none' } }} onClick={() => navigateTo('/category/men')}>
                         <ListItemIcon>
                             <MaleOutlined />
                         </ListItemIcon>
                         <ListItemText primary={'Hombres'} />
                     </ListItem>
 
-                    <ListItem button sx={{ display: { xs: '', sm: 'none' } }}>
+                    <ListItem button sx={{ display: { xs: '', sm: 'none' } }} onClick={() => navigateTo('/category/women')}>
                         <ListItemIcon>
                             <FemaleOutlined />
                         </ListItemIcon>
                         <ListItemText primary={'Mujeres'} />
                     </ListItem>
 
-                    <ListItem button sx={{ display: { xs: '', sm: 'none' } }}>
+                    <ListItem button sx={{ display: { xs: '', sm: 'none' } }} onClick={() => navigateTo('/category/kid')}>
                         <ListItemIcon>
                             <EscalatorWarningOutlined />
                         </ListItemIcon>

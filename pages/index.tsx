@@ -1,21 +1,36 @@
+//Interfaces
 import type { NextPage } from 'next';
+
+//MUI
 import { Typography } from '@mui/material';
 
+//Components
 import { ShopLayout } from '../components/layouts';
-import { initialData } from '../database/products';
 import { ProductList } from '../components/products';
+import { FullScreenLoading } from '@/components/ui';
+
+//Data
+import { initialData } from '../database/products';
+
+//Hooks
+import { useProducts } from '@/hooks';
 
 
 const Home: NextPage = () => {
+
+  const { products, isLoading, isError } = useProducts('/products');
+
   return (
     <ShopLayout title={'Teslo-Shop - Home'} pageDescription={'Encuentra los mejores productos de Teslo aquí'}>
       <>
         <Typography variant='h1' component='h1'>Tienda</Typography>
         <Typography variant='h2' sx={{ mb: 1 }}>Todos los productos</Typography>
 
-        <ProductList
-          products={initialData.products as any}
-        />
+        {
+          isLoading
+            ? <FullScreenLoading />
+            : <ProductList products={products} />
+        }
       </>
 
 

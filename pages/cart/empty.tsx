@@ -18,8 +18,10 @@ const EmptyPage = () => {
                 <Box display='flex' flexDirection='column' alignItems='center'>
                     <Typography>Su carrito está vació</Typography>
 
-                    <Link href='/' typography="h4" color='secondary'>
-                        Regresar
+                    <Link href='/' >
+                        <Typography variant='h4' color='secondary'>
+                            Regresar
+                        </Typography>
                     </Link>
 
                 </Box>
