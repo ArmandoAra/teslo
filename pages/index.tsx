@@ -10,7 +10,7 @@ import { ProductList } from '../components/products';
 import { FullScreenLoading } from '@/components/ui';
 
 //Data
-import { initialData } from '../database/products';
+import { initialData } from '../database/seed-data';
 
 //Hooks
 import { useProducts } from '@/hooks';

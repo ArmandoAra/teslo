@@ -12,13 +12,6 @@ const OrderPage = () => {
         <ShopLayout title='Resumen de la orden 123671523' pageDescription={'Resumen de la orden'}>
             <Typography variant='h1' component='h1'>Orden: ABC123</Typography>
 
-            {/* <Chip 
-            sx={{ my: 2 }}
-            label="Pendiente de pago"
-            variant='outlined'
-            color="error"
-            icon={ <CreditCardOffOutlined /> }
-        /> */}
             <Chip
                 sx={{ my: 2 }}
                 label="Orden ya fue pagada"
@@ -82,8 +75,6 @@ const OrderPage = () => {
                     </Card>
                 </Grid>
             </Grid>
-
-
         </ShopLayout>
     )
 }

@@ -1,5 +1,6 @@
 import { db, initialData } from '@/database'
-import { ProductModel } from '@/models'
+import { ProductModel, UserModel } from '@/models'
+
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 type Data = {
@@ -13,8 +14,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     }
 
     await db.connectDB()
+
+    //Insertamos los usuarios
+    await UserModel.deleteMany()
+    await UserModel.insertMany(initialData.users)
+
+
     // En este espacio podemos hacer las operaciones que queramos
-    await ProductModel.deleteMany({})
+    await ProductModel.deleteMany()
     await ProductModel.insertMany(initialData.products)
 
     await db.disconnectDB()

@@ -9,8 +9,6 @@ import { AccountCircleOutlined, AdminPanelSettings, CategoryOutlined, Confirmati
 //Context
 import { UIContext } from "@/context"
 
-
-
 export const SideMenu = () => {
 
     const { sideMenuOpen, closeSideBar } = useContext(UIContext)
@@ -82,14 +80,14 @@ export const SideMenu = () => {
                         <ListItemText primary={'Hombres'} />
                     </ListItem>
 
-                    <ListItem button sx={{ display: { xs: '', sm: 'none' } }} onClick={() => navigateTo('/category/women')}>
+                    <ListItem sx={{ display: { xs: '', sm: 'none' } }} onClick={() => navigateTo('/category/women')}>
                         <ListItemIcon>
                             <FemaleOutlined />
                         </ListItemIcon>
                         <ListItemText primary={'Mujeres'} />
                     </ListItem>
 
-                    <ListItem button sx={{ display: { xs: '', sm: 'none' } }} onClick={() => navigateTo('/category/kid')}>
+                    <ListItem sx={{ display: { xs: '', sm: 'none' } }} onClick={() => navigateTo('/category/kid')}>
                         <ListItemIcon>
                             <EscalatorWarningOutlined />
                         </ListItemIcon>
@@ -97,14 +95,14 @@ export const SideMenu = () => {
                     </ListItem>
 
 
-                    <ListItem button>
+                    <ListItem>
                         <ListItemIcon>
                             <VpnKeyOutlined />
                         </ListItemIcon>
                         <ListItemText primary={'Ingresar'} />
                     </ListItem>
 
-                    <ListItem button>
+                    <ListItem>
                         <ListItemIcon>
                             <LoginOutlined />
                         </ListItemIcon>
@@ -116,20 +114,20 @@ export const SideMenu = () => {
                     <Divider />
                     <ListSubheader>Admin Panel</ListSubheader>
 
-                    <ListItem button>
+                    <ListItem>
                         <ListItemIcon>
                             <CategoryOutlined />
                         </ListItemIcon>
                         <ListItemText primary={'Productos'} />
                     </ListItem>
-                    <ListItem button>
+                    <ListItem>
                         <ListItemIcon>
                             <ConfirmationNumberOutlined />
                         </ListItemIcon>
                         <ListItemText primary={'Ordenes'} />
                     </ListItem>
 
-                    <ListItem button>
+                    <ListItem>
                         <ListItemIcon>
                             <AdminPanelSettings />
                         </ListItemIcon>

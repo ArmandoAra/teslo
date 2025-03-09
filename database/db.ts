@@ -11,7 +11,7 @@ const mongoConnection = {
 }
 
 export const connectDB = async () => {
-    const mongo_url = process.env.MONGODB_URL || 'mongodb://localhost:27017/teslodb'
+    const mongo_url = process.env.MONGODB_URL || 'mongodb://localhost:27017/entriesdb'
 
 
 

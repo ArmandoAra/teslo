@@ -9,7 +9,7 @@ import { AppBar, Badge, Box, Button, IconButton, Input, InputAdornment, Toolbar,
 import { ClearOutlined, SearchOutlined, ShoppingCartOutlined } from '@mui/icons-material';
 
 // Context
-import { UIContext } from '@/context';
+import { UIContext, CartContext } from '@/context';
 
 export const Navbar = () => {
 
@@ -18,6 +18,7 @@ export const Navbar = () => {
 
     //Manejando el menu lateral
     const { openSideBar } = useContext(UIContext)
+    const { numberOfItems } = useContext(CartContext)
 
     const { sideMenuOpen, closeSideBar } = useContext(UIContext)
 
@@ -122,7 +123,7 @@ export const Navbar = () => {
 
                 <Link href="/cart">
                     <IconButton>
-                        <Badge badgeContent={2} color="secondary"> {/* El badgeContent es donde sale el numerito encima del carrito de compras */}
+                        <Badge badgeContent={numberOfItems < 9 ? numberOfItems : '+9'} color="secondary"> {/* El badgeContent es donde sale el numerito encima del carrito de compras */}
                             <ShoppingCartOutlined />
                         </Badge>
                     </IconButton>

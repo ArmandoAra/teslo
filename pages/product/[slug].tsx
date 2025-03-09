@@ -1,5 +1,7 @@
+import { useState, useContext } from 'react';
+
 //Next
-import { GetServerSideProps, GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 
 //MUI
 import { Box, Button, Chip, Grid, Typography } from '@mui/material';
@@ -13,8 +15,13 @@ import { ItemCounter } from '../../components/ui/ItemCounter';
 import { dbProduct } from '@/database';
 import { getProductBySlug } from '@/database/dbProducts';
 
+//Context
+
+
 //Interface
-import { IProduct } from '@/interfaces';
+import { ICartProduct, IProduct, ISize } from '@/interfaces';
+import { useRouter } from 'next/router';
+import { CartContext } from '@/context';
 
 
 interface Props {
@@ -22,8 +29,53 @@ interface Props {
 }
 
 
+//Verificar que este grabado en el estado de cart 
+//addProductToCart en CartProvider
+//Se deve ver en el estorage que se acumulan los productos
+
 const ProductPage: NextPage<Props> = ({ product }) => {
 
+    const router = useRouter();
+    const { addProductToCart } = useContext(CartContext)
+
+    const [tempCartProduct, setTempCartProduct] = useState<ICartProduct>(
+        {
+            _id: product._id,
+            title: product.title,
+            price: product.price,
+            image: product.images[0],
+            gender: product.gender,
+            size: undefined,
+            slug: product.slug,
+            quantity: 1,
+        }
+    );
+
+
+    //Manejar el cambio de la talla
+    const selectedNewSize = (size: ISize) => {
+        setTempCartProduct(currentProduct => ({
+            ...currentProduct,
+            size,
+        }))
+    }
+
+    //Manejar el cambio de la cantidad
+    const handleQuantity = (quantity: number) => {
+        setTempCartProduct(currentProduct => ({
+            ...currentProduct,
+            quantity,
+        }))
+    }
+
+    //Manejar el click de agregar al carrito
+    const onAddProduct = () => {
+        if (!tempCartProduct.size) return;
+
+        addProductToCart(tempCartProduct)
+
+        router.push('/cart');
+    }
 
     return (
         <ShopLayout title={product.title} pageDescription={product.description}>
@@ -46,20 +98,40 @@ const ProductPage: NextPage<Props> = ({ product }) => {
                         {/* Cantidad */}
                         <Box sx={{ my: 2 }}>
                             <Typography variant='subtitle2'>Cantidad</Typography>
-                            <ItemCounter />
+
+                            {/* Contador */}
+                            <ItemCounter
+                                currentValue={tempCartProduct.quantity}
+                                updateQuantity={handleQuantity}
+                                maxValue={product.inStock}
+
+                            />
+
+                            {/* Tallas */}
                             <SizeSelector
                                 // selectedSize={ product.sizes[2] } 
                                 sizes={product.sizes}
+                                selectedSize={tempCartProduct.size}
+                                handleSizeClick={(size) => selectedNewSize(size)}
                             />
                         </Box>
 
-
                         {/* Agregar al carrito */}
-                        {/* <Button color="secondary" className='circular-btn'>
-                            Agregar al carrito
-                        </Button> */}
-
-                        {/* <Chip label="No hay disponibles" color="error" variant='outlined' /> */}
+                        {
+                            (product.inStock > 0)
+                                ? <Button
+                                    color="secondary"
+                                    className='circular-btn'
+                                    onClick={onAddProduct}
+                                >
+                                    {
+                                        tempCartProduct.size
+                                            ? 'Agregar al carrito'
+                                            : 'Selecciona una talla'
+                                    }
+                                </Button>
+                                : <Chip label="No hay disponibles" color="error" variant='outlined' />
+                        }
 
                         {/* Descripción */}
                         <Box sx={{ mt: 3 }}>
@@ -76,27 +148,6 @@ const ProductPage: NextPage<Props> = ({ product }) => {
         </ShopLayout>
     )
 }
-
-//getServerSideProps
-//No Hacer esto, Esto va a hacer que cada vez que el usuario necesite la pagina, haga la req al servidor
-// export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-
-//     const { slug = '' } = params as { slug: string }
-//     const product = await dbProduct.getProductBySlug(slug)
-//     if (!product) {
-//         return {
-//             redirect: {
-//                 destination: '/',
-//                 permanent: false,
-//             }
-//         }
-//     }
-//     return {
-//         props: {
-//             product,
-//         }
-//     }
-// }
 
 
 //Hacer el getStaticPaths
@@ -155,3 +206,5 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 
 
 export default ProductPage;
+
+
